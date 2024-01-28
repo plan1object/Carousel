@@ -99,16 +99,7 @@
             });
         });
 
-        let autoAni = setInterval(function(){ 
-            // 컴퓨터가 알아서 2초마다 넥스트 버튼을 누르는것과 같으므로
-            // 넥스트 버튼걸 그대로 가져오면 끝남.
-            if(index >=  btnAll.length - 1){
-                index = 0;
-            }else{
-                index += 1;
-            }
-            updateCarousel(index);
-        },2000);
+        let autoAni = carouselAnimate();
 
         toggleBtn.addEventListener('click', () => {
             if(bool === true){
@@ -116,18 +107,24 @@
                 bool = false;
                 toggleBtn.innerHTML = 'PLAY';
             }else{
-                autoAni = setInterval(function(){ 
-                if(index >=  btnAll.length - 1){
-                    index = 0;
-                }else{
-                    index += 1;
-                }
-                updateCarousel(index);
-                },2000);
+                autoAni = carouselAnimate();
                 bool = true;
                 toggleBtn.innerHTML = 'STOP';
             }
         });
+        
+        function carouselAnimate(){
+           return setInterval(function(){ 
+            // setInterval 자체를 리턴, 함수를 실행한 자리에 뱉겠다고 한거임.
+            // 함수 한줄로 축약이 가능해짐.
+            if(index >=  btnAll.length - 1){
+                index = 0;
+            }else{
+                index += 1;
+            }
+            updateCarousel(index);
+            },2000);
+        }
         
         function updateCarousel(j){
             container.style.transform = `translate(-${100 * j}vw)`;
