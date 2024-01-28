@@ -72,18 +72,20 @@
         const btnAll = document.querySelectorAll('.btnAll > li');
 
         prevBtn.addEventListener('click', () => {
-            if(index === 0){ // 만약에 inndex가 0이면 함수자체를 종료해라.
-                return; // 여기서 함수란 클릭이벤트 자체의 함수를 뜻함. 
-            } // 아무것도 하지않고 종료함.
-            index -= 1; 
+            if(index <= 0){ 
+                index = btnAll.length - 1 
+            }else{
+                index -= 1; 
+            }
             updateCarousel(index);            
         });
 
         nextBtn.addEventListener('click', () => {
-            if(index ===  btnAll.length - 1){
-                return;
+            if(index >=  btnAll.length - 1){
+                index = 0;
+            }else{
+                index += 1;
             }
-            index += 1;
             updateCarousel(index);
         });
 
