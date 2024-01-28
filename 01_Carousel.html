@@ -49,18 +49,21 @@
         <button class="prev">prev</button>
         <ul class="btnAll"></ul>
         <button class="next">next</button>
+        <button id="toggle">STOP</button>
     </div>
     <script>
         const container = document.querySelector('.container');
         const nextBtn = document.querySelector('.next');
         const prevBtn = document.querySelector('.prev');
-        
+        const toggleBtn = document.querySelector('#toggle');
+
         let btnArr = '';
         let imgArrSrc = ['https://mcdn.wallpapersafari.com/medium/42/55/oTLiEw.jpg',
                         'https://images.pling.com/img/00/00/45/66/30/1177712/54aa419c436e3af8d3d6fad35c9e35dc0707.jpg',
                         'https://mcdn.wallpapersafari.com/medium/53/22/facp4d.jpg'];
         let imgArr = '';        
         let index = 0; 
+        let bool = true;
 
         for(let i = 0; i < imgArrSrc.length; i++){
             imgArr += `<li class='inner'><a href="#"><img src="${imgArrSrc[i]}" alt="${i + 1}번째 이미지"></a></li>`;
@@ -106,6 +109,25 @@
             }
             updateCarousel(index);
         },2000);
+
+        toggleBtn.addEventListener('click', () => {
+            if(bool === true){
+                clearInterval(autoAni);
+                bool = false;
+                toggleBtn.innerHTML = 'PLAY';
+            }else{
+                autoAni = setInterval(function(){ 
+                if(index >=  btnAll.length - 1){
+                    index = 0;
+                }else{
+                    index += 1;
+                }
+                updateCarousel(index);
+                },2000);
+                bool = true;
+                toggleBtn.innerHTML = 'STOP';
+            }
+        });
         
         function updateCarousel(j){
             container.style.transform = `translate(-${100 * j}vw)`;
