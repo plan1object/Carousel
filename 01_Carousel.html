@@ -58,16 +58,20 @@
         const toggleBtn = document.querySelector('#toggle');
 
         let btnArr = '';
-        let imgArrSrc = ['https://mcdn.wallpapersafari.com/medium/42/55/oTLiEw.jpg',
-                        'https://images.pling.com/img/00/00/45/66/30/1177712/54aa419c436e3af8d3d6fad35c9e35dc0707.jpg',
-                        'https://mcdn.wallpapersafari.com/medium/53/22/facp4d.jpg'];
+        // 유지보수가 원활하게 만들기위해서 DB를 분리해버림.
+        let imgArrSrc = [{url : 'https://mcdn.wallpapersafari.com/medium/42/55/oTLiEw.jpg',
+                        alt : '우주이미지', link : '#none'},
+                        {url : 'https://images.pling.com/img/00/00/45/66/30/1177712/54aa419c436e3af8d3d6fad35c9e35dc0707.jpg',
+                        alt : '도형이미지', link : '#none'},
+                        {url : 'https://mcdn.wallpapersafari.com/medium/53/22/facp4d.jpg',
+                        alt : '슬랙이미지', link : '#none'}];
         let imgArr = '';        
         let index = 0; 
         let bool = true;
 
         for(let i = 0; i < imgArrSrc.length; i++){
-            imgArr += `<li class='inner'><a href="#"><img src="${imgArrSrc[i]}" alt="${i + 1}번째 이미지"></a></li>`;
-            btnArr += `<li><button class="btn${i}">${i + 1}</button></li>`;
+            imgArr += `<li class='inner'><a href="${imgArrSrc[i].link}"><img src="${imgArrSrc[i].url}" alt="${imgArrSrc[i].alt}"></a></li>`;
+            btnArr += `<li><button class="btn${i}">${imgArrSrc[i].alt}</button></li>`;
         }
         container.innerHTML = imgArr;
         document.querySelector('.btnAll').innerHTML = btnArr;
