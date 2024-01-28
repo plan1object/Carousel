@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>캐러셀 태그구조 기반</title>
+    <title>Document</title>
     <style>
         *{
             margin: 0;
@@ -43,27 +43,31 @@
 </head>
 <body>
     <div class="wrap">
-        <ul class="container">
-            <li class='inner'><a href="#"><img src="https://mcdn.wallpapersafari.com/medium/42/55/oTLiEw.jpg" alt="1번째 이미지"></a></li>
-            <li class='inner'><a href="#"><img src="https://images.pling.com/img/00/00/45/66/30/1177712/54aa419c436e3af8d3d6fad35c9e35dc0707.jpg" alt="2번째 이미지"></a></li>
-            <li class='inner'><a href="#"><img src="https://mcdn.wallpapersafari.com/medium/53/22/facp4d.jpg" alt="3번째 이미지"></a></li>
-        </ul>
+        <ul class="container"></ul>
     </div>
     <div style="display: flex;">
         <button class="prev">prev</button>
-        <ul class="btnAll">
-            <li><button class="btn0">1</button></li>
-            <li><button class="btn1">2</button></li>
-            <li><button class="btn2">3</button></li>
-        </ul>
+        <ul class="btnAll"></ul>
         <button class="next">next</button>
     </div>
     <script>
         const container = document.querySelector('.container');
         const nextBtn = document.querySelector('.next');
         const prevBtn = document.querySelector('.prev');
-              
+        
+        let btnArr = '';
+        let imgArr = '';        
         let index = 0; 
+        let imgArrSrc = ['https://mcdn.wallpapersafari.com/medium/42/55/oTLiEw.jpg',
+                        'https://images.pling.com/img/00/00/45/66/30/1177712/54aa419c436e3af8d3d6fad35c9e35dc0707.jpg',
+                        'https://mcdn.wallpapersafari.com/medium/53/22/facp4d.jpg'];
+
+        for(let i = 0; i < imgArrSrc.length; i++){
+            imgArr += `<li class='inner'><a href="#"><img src="${imgArrSrc[i]}" alt="${i + 1}번째 이미지"></a></li>`;
+            btnArr += `<li><button class="btn${i}">${i + 1}</button></li>`;
+        }
+        container.innerHTML = imgArr;
+        document.querySelector('.btnAll').innerHTML = btnArr;
 
         const btnAll = document.querySelectorAll('.btnAll > li');
 
